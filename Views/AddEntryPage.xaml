@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SleepHelper.ViewModels"
+             x:Class="SleepHelper.Views.AddEntryPage"
+             Shell.PresentationMode="ModalAnimated"
+             BackgroundColor="{StaticResource SheetBg}">
+	<ScrollView>
+		<VerticalStackLayout Padding="20,16,20,28" Spacing="0">
+
+			<Grid ColumnDefinitions="*,Auto" Margin="0,0,0,18">
+				<Label Text="Додати запис 🌙" FontSize="18" FontAttributes="Bold"
+				       HorizontalOptions="Center" VerticalOptions="Center" Grid.ColumnSpan="2" />
+				<Button Grid.Column="1" Text="✕" BackgroundColor="Transparent"
+				        TextColor="{StaticResource Muted}" Clicked="OnCloseClicked"
+				        WidthRequest="44" HeightRequest="44" Padding="0" />
+			</Grid>
+
+			<Grid ColumnDefinitions="*,*" ColumnSpacing="14">
+				<VerticalStackLayout Spacing="6">
+					<Label Text="Ліг спати" FontSize="12" TextColor="{StaticResource Muted}" />
+					<Border BackgroundColor="{StaticResource InputBg}" Stroke="{StaticResource Line}"
+					        StrokeShape="RoundRectangle 14" Padding="0,4">
+						<TimePicker Time="{Binding Bedtime}" FontSize="22" FontAttributes="Bold"
+						            HorizontalOptions="Center" />
+					</Border>
+				</VerticalStackLayout>
+				<VerticalStackLayout Grid.Column="1" Spacing="6">
+					<Label Text="Прокинувся" FontSize="12" TextColor="{StaticResource Muted}" />
+					<Border BackgroundColor="{StaticResource InputBg}" Stroke="{StaticResource Line}"
+					        StrokeShape="RoundRectangle 14" Padding="0,4">
+						<TimePicker Time="{Binding Wake}" FontSize="22" FontAttributes="Bold"
+						            HorizontalOptions="Center" />
+					</Border>
+				</VerticalStackLayout>
+			</Grid>
+
+			<Label Text="{Binding DurationText}" FontSize="13" FontAttributes="Bold"
+			       TextColor="{StaticResource Accent}" HorizontalOptions="Center" Margin="0,16" />
+
+			<Label Text="Якість сну" FontSize="12" TextColor="{StaticResource Muted}" Margin="0,0,0,6" />
+			<Border BackgroundColor="{StaticResource InputBg}" StrokeThickness="0"
+			        StrokeShape="RoundRectangle 20" Padding="6">
+				<FlexLayout BindableLayout.ItemsSource="{Binding QualityOptions}" JustifyContent="SpaceBetween">
+					<BindableLayout.ItemTemplate>
+						<DataTemplate x:DataType="vm:QualityOptionViewModel">
+							<Border WidthRequest="52" HeightRequest="44" StrokeShape="RoundRectangle 14"
+							        BackgroundColor="{Binding Bg}" Stroke="{Binding BorderBrush}"
+							        StrokeThickness="1" Padding="0">
+								<Border.GestureRecognizers>
+									<TapGestureRecognizer
+										Command="{Binding Source={RelativeSource AncestorType={x:Type vm:AddEntryViewModel}}, Path=SelectQualityCommand}"
+										CommandParameter="{Binding Index}" />
+								</Border.GestureRecognizers>
+								<Label Text="{Binding Emoji}" FontSize="{Binding FontSize}" Opacity="{Binding Opacity}"
+								       HorizontalOptions="Center" VerticalOptions="Center"
+								       SemanticProperties.Description="{Binding Label}" />
+							</Border>
+						</DataTemplate>
+					</BindableLayout.ItemTemplate>
+				</FlexLayout>
+			</Border>
+			<Label Text="{Binding QualityLabel}" FontSize="12" TextColor="{StaticResource Muted}"
+			       HorizontalOptions="Center" Margin="0,8,0,14" />
+
+			<Label Text="Нотатки (необов’язково)" FontSize="12" TextColor="{StaticResource Muted}" Margin="0,0,0,6" />
+			<Border BackgroundColor="{StaticResource InputBg}" Stroke="{StaticResource Line}"
+			        StrokeShape="RoundRectangle 14" Padding="8,4">
+				<Editor Text="{Binding Notes}" MaxLength="200" HeightRequest="96" AutoSize="Disabled"
+				        Placeholder="Швидко заснув, але прокидався вночі..."
+				        PlaceholderColor="{StaticResource Muted}" FontSize="14"
+				        BackgroundColor="Transparent" />
+			</Border>
+
+			<Grid Margin="0,18,0,0">
+				<Button Text="Зберегти" Style="{StaticResource PrimaryButton}"
+				        Command="{Binding SaveCommand}" IsEnabled="{Binding NotSaving}" />
+				<ActivityIndicator IsRunning="{Binding Saving}" IsVisible="{Binding Saving}"
+				                   Color="{StaticResource AccentText}"
+				                   HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True" />
+			</Grid>
+
+		</VerticalStackLayout>
+	</ScrollView>
+</ContentPage>

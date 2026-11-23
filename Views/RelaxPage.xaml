@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SleepHelper.Views.RelaxPage"
+             Title="Релакс">
+	<Grid RowDefinitions="Auto,*" Padding="20,12,20,0">
+		<Label Text="Релакс" Style="{StaticResource H1}" />
+		<Label Grid.Row="1" Text="Екран у розробці 🌙" FontSize="16" TextColor="{StaticResource Muted}"
+		       HorizontalOptions="Center" VerticalOptions="Center" />
+	</Grid>
+</ContentPage>

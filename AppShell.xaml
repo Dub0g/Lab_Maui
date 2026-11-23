@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:SleepHelper.Views"
+       x:Class="SleepHelper.AppShell"
+       Shell.BackgroundColor="{StaticResource Bg}"
+       Shell.NavBarIsVisible="False"
+       Shell.TabBarBackgroundColor="{StaticResource Bg}"
+       Shell.TabBarTitleColor="{StaticResource Accent}"
+       Shell.TabBarForegroundColor="{StaticResource Accent}"
+       Shell.TabBarUnselectedColor="{StaticResource Muted}">
+
+	<!-- Нижня навігація з п’яти вкладок -->
+	<TabBar>
+		<ShellContent Title="Головна" Route="Home"
+		              ContentTemplate="{DataTemplate views:HomePage}"
+		              Icon="{FontImageSource Glyph='🏠', Size=22}" />
+		<ShellContent Title="Щоденник" Route="Diary"
+		              ContentTemplate="{DataTemplate views:DiaryPage}"
+		              Icon="{FontImageSource Glyph='📖', Size=22}" />
+		<ShellContent Title="Статистика" Route="Stats"
+		              ContentTemplate="{DataTemplate views:StatsPage}"
+		              Icon="{FontImageSource Glyph='📊', Size=22}" />
+		<ShellContent Title="Розрахунок" Route="Calc"
+		              ContentTemplate="{DataTemplate views:CalcPage}"
+		              Icon="{FontImageSource Glyph='⏰', Size=22}" />
+		<ShellContent Title="Релакс" Route="Relax"
+		              ContentTemplate="{DataTemplate views:RelaxPage}"
+		              Icon="{FontImageSource Glyph='🌙', Size=22}" />
+	</TabBar>
+</Shell>
